@@ -1,51 +1,27 @@
-# React + TypeScript + Vite
+## デプロイ（DB 管理を含めない）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+https://dckk0302.github.io/yumemi-frontend-coding-test/
 
-Currently, two official plugins are available:
+## 導入方法
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/dcKK0302/yumemi-frontend-coding-test.git
+cd yumemi-frontend-coding-test
+npm ci
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 環境変数の設定
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+`.env.local` を作成してください。
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+# .env.local
+REACT_APP_API_URL=https://opendata.resas-portal.go.jp
+REACT_APP_API_KEY=上記URLにて,ご自分で作成したRESASAPIのapikeyを設定してください。
 ```
-# yumemi-frontend-coding-app
+
+### 起動方法
+
+```bash
+npm start
+```
