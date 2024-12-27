@@ -10,19 +10,26 @@
 
   .l-main__inner {
     border: 1px solid #000;
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    column-gap: 48px;
     max-width: 1000px;
   }
 }
 
 .l-sectionWrap {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
 }
 
 .l-section {
   display: flex;
   flex-direction: column;
+}
+
+.l-prefList {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 // ==============================================
@@ -37,6 +44,10 @@
       row-gap: 52px;
     }
   }
+
+  .l-prefList {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 // ==============================================
@@ -45,5 +56,8 @@
 @media screen and (width <= 649px) {
   .l-main {
     padding: 40px 20px 100px;
+  }
+  .l-prefList {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

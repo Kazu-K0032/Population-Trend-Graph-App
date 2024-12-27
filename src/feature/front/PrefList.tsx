@@ -1,66 +1,90 @@
+// src/feature/front/PrefList.tsx
+import { useState } from "react";
 import CheckItem from "../../components/CheckItem";
+import { fetchPopulation } from "../../api/population";
 
-// 都道府県
-const prefectures = [
-  "北海道",
-  "青森県",
-  "岩手県",
-  "宮城県",
-  "秋田県",
-  "山形県",
-  "福島県",
-  "茨城県",
-  "栃木県",
-  "群馬県",
-  "埼玉県",
-  "千葉県",
-  "東京都",
-  "神奈川県",
-  "新潟県",
-  "富山県",
-  "石川県",
-  "福井県",
-  "山梨県",
-  "長野県",
-  "岐阜県",
-  "静岡県",
-  "愛知県",
-  "三重県",
-  "滋賀県",
-  "京都府",
-  "大阪府",
-  "兵庫県",
-  "奈良県",
-  "和歌山県",
-  "鳥取県",
-  "島根県",
-  "岡山県",
-  "広島県",
-  "山口県",
-  "徳島県",
-  "香川県",
-  "愛媛県",
-  "高知県",
-  "福岡県",
-  "佐賀県",
-  "長崎県",
-  "熊本県",
-  "大分県",
-  "宮崎県",
-  "鹿児島県",
-  "沖縄県",
+type Prefecture = {
+  code: number;
+  name: string;
+};
+
+const prefectures: Prefecture[] = [
+  { code: 1, name: "北海道" },
+  { code: 2, name: "青森県" },
+  // ...
 ];
 
+// API から取得したデータの型
+type PopulationData = {
+  prefCode: number;
+  data: { year: number; value: number }[];
+};
+
 export default function PrefList() {
+  // どの都道府県コードが選択中か
+  const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
+  // 選択中の都道府県の人口データ一覧
+  const [populationList, setPopulationList] = useState<PopulationData[]>([]);
+
+  // チェック切り替えハンドラ
+  const handleChange = async (prefCode: number, checked: boolean) => {
+    if (checked) {
+      // チェックが ON になった
+      setSelectedPrefCodes((prev) => [...prev, prefCode]);
+
+      // 人口データを取得してステートに格納
+      try {
+        const popData = await fetchPopulation(prefCode);
+        // populationListに追加
+        setPopulationList((prev) => [
+          ...prev,
+          {
+            prefCode,
+            data: popData,
+          },
+        ]);
+      } catch (err) {
+        console.error("人口データ取得に失敗しました", err);
+      }
+    } else {
+      // チェックが OFF になった
+      setSelectedPrefCodes((prev) => prev.filter((code) => code !== prefCode));
+      setPopulationList((prev) => prev.filter((p) => p.prefCode !== prefCode));
+    }
+  };
+
   return (
     <div>
       <ul className="l-prefList">
-        {prefectures.map((pref, index) => (
-          <li key={index} className="l-prefList__item">
-            <CheckItem id="check1" name={pref} isChecked={false} />
+        {prefectures.map((pref) => (
+          <li key={pref.code} className="l-prefList__item">
+            <CheckItem
+              id={`check-${pref.code}`}
+              name={pref.name}
+              isChecked={false}
+              onChange={(checked) => handleChange(pref.code, checked)}
+            />
           </li>
         ))}
       </ul>
+
+      <p>選択中の都道府県コード: {selectedPrefCodes.join(", ")}</p>
+
+      {/* 人口データ表示 */}
+      <div>
+        {populationList.map((pop) => (
+          <div key={pop.prefCode}>
+            <h4>都道府県コード: {pop.prefCode}</h4>
+            <ul>
+              {pop.data.map((d) => (
+                <li key={d.year}>
+                  {d.year} 年: {d.value} 人
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
