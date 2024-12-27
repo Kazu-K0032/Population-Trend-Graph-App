@@ -1,0 +1,54 @@
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+.c-mainTtl {
+  position: relative;
+  margin-bottom: 28px;
+  padding-bottom: 19px;
+  color: $title;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+
+.c-check {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  .c-check__box {
+    width: 15px;
+    height: 15px;
+    border-radius: 20%;
+    border: 1px solid #000;
+    margin-right: 4px;
+  }
+
+  .c-check_label {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+@media screen and (width <= 1024px) {
+}
+
+// ==============================================
+// SMALL
+// ==============================================
+@media screen and (width <= 649px) {
+  .c-mainTtl {
+    font-size: 2rem;
+  }
+}

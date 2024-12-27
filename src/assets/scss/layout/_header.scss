@@ -2,14 +2,55 @@
 @use "../foundation/_base";
 @use "../foundation/_variables" as *;
 
+.l-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 90px;
+  background-color: $corp;
+  .l-header__inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+  }
+}
+
+.l-headerTtl {
+  .l-headerTtl__ttl {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+  }
+}
+
 // ==============================================
 // MEDIUM
 // ==============================================
 @media screen and (width <= 1024px) {
+  .l-header {
+    height: 56px;
+    padding: 0 40px;
+  }
+
+  .l-headerTtl {
+    .l-headerTtl__img {
+      width: 127px;
+      height: 20px;
+    }
+    .l-headerTtl__ttl {
+      font-size: 1.2rem;
+    }
+  }
 }
 
 // ==============================================
 // SMALL
 // ==============================================
 @media screen and (width <= 649px) {
+  .l-header {
+    padding: 0 20px;
+  }
 }

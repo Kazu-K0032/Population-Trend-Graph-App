@@ -2,14 +2,38 @@
 @use "../foundation/_base";
 @use "../foundation/_variables" as *;
 
+.l-footer {
+  width: 100%;
+  border-top: 4px solid $corp;
+  background-color: #fff;
+  .l-footer__inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 56px 0;
+  }
+}
+
 // ==============================================
 // MEDIUM
 // ==============================================
 @media screen and (width <= 1024px) {
+  .l-footer {
+    .l-footer__inner {
+      max-width: none;
+      margin: 0;
+      padding: 56px 40px;
+    }
+  }
 }
 
 // ==============================================
 // SMALL
 // ==============================================
 @media screen and (width <= 649px) {
+  .l-footer {
+    .l-footer__inner {
+      padding: 56px 20px;
+    }
+  }
 }
