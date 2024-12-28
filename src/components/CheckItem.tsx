@@ -1,13 +1,6 @@
 // src/components/CheckItem.tsx
 import { useState, useEffect } from "react";
 
-type CheckItemProps = {
-  id: string;
-  name: string;
-  isChecked: boolean;
-  onChange: (checked: boolean) => void;
-};
-
 export default function CheckItem({
   id,
   name,
