@@ -1,28 +1,69 @@
-// src/layout/Main.tsx
-
-import { useState } from "react";
+import React, { useState } from "react";
+import { Bar } from "react-chartjs-2";
 import PrefList from "../feature/front/PrefList";
 import {
-  BarChart,
-  Bar,
-  CartesianGrid,
-  XAxis,
-  YAxis,
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
   Tooltip,
   Legend,
-} from "recharts";
+} from "chart.js";
 
-type PopulationData = {
-  prefCode: number;
-  prefName: string; // 都道府県名を持たせる（表示用）
-  data: { year: number; value: number }[];
-};
+// Chart.jsのコンポーネントを登録（コンポーネント外で実行）
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 export default function Main() {
   // 選択している都道府県コードの配列
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
+
+  // グラフデータ
+  const data = {
+    labels: [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+    ], // X軸ラベル
+    datasets: [
+      {
+        label: "北海道",
+        data: [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 12],
+        backgroundColor: "red",
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  // グラフオプション
+  const options = {
+    responsive: true, // レスポンシブ対応
+    plugins: {
+      legend: {
+        display: true, // 凡例を表示
+        position: "top" as const,
+      },
+      tooltip: {
+        enabled: true, // ツールチップを有効化
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // Y軸の最小値を0に設定
+      },
+    },
+  };
 
   return (
     <div>
@@ -31,10 +72,6 @@ export default function Main() {
           <div className="l-sectionWrap">
             <section className="l-section">
               <h2 className="c-mainTtl">都道府県</h2>
-              {/*
-                PrefList にステートとステート更新関数を渡す
-                PrefList からはチェックの ON/OFF でこれらを更新してもらう
-              */}
               <PrefList
                 selectedPrefCodes={selectedPrefCodes}
                 setSelectedPrefCodes={setSelectedPrefCodes}
@@ -45,21 +82,10 @@ export default function Main() {
 
             <section className="l-section">
               <h2 className="c-mainTtl">グラフ</h2>
-
-              {/* populationList に格納されている都道府県ごとにグラフを描画 */}
-              {populationList.map((pop) => (
-                <div key={pop.prefCode} style={{ marginBottom: "2rem" }}>
-                  <h3>{pop.prefName} の総人口推移</h3>
-                  <BarChart width={500} height={300} data={pop.data}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#82ca9d" />
-                  </BarChart>
-                </div>
-              ))}
+              <div>
+                <h1>React + TypeScript Chart.js Example</h1>
+                <Bar data={data} options={options} />
+              </div>
             </section>
           </div>
         </div>
