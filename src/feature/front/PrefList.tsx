@@ -1,6 +1,5 @@
 import CheckItem from "../../components/CheckItem";
 import { fetchPopulation } from "../../api/population"; // API 呼び出し
-import { Dispatch, SetStateAction } from "react";
 
 const prefectures: Prefecture[] = [
   { code: 1, name: "北海道" },
@@ -59,19 +58,23 @@ export default function PrefList({
   setPopulationList,
 }: PrefListProps) {
   // チェック切り替えハンドラ
-  const handleChange = async (prefCode: number, prefName: string, checked: boolean) => {
+  const handleChange = async (
+    prefCode: number,
+    prefName: string,
+    checked: boolean
+  ) => {
     if (checked) {
       // チェックが ON になった
-      setSelectedPrefCodes((prev) => [...prev, prefCode]);
+      setSelectedPrefCodes((prev: number[]) => [...prev, prefCode]);
 
       // 人口データを取得してステートに格納
       try {
         const popData = await fetchPopulation(prefCode);
-        setPopulationList((prev) => [
+        setPopulationList((prev: PopulationData[]) => [
           ...prev,
           {
             prefCode,
-            prefName,  // ここで都道府県名も入れておく
+            prefName,
             data: popData,
           },
         ]);
@@ -80,8 +83,12 @@ export default function PrefList({
       }
     } else {
       // チェックが OFF になった
-      setSelectedPrefCodes((prev) => prev.filter((code) => code !== prefCode));
-      setPopulationList((prev) => prev.filter((p) => p.prefCode !== prefCode));
+      setSelectedPrefCodes((prev: number[]) =>
+        prev.filter((code) => code !== prefCode)
+      );
+      setPopulationList((prev: PopulationData[]) =>
+        prev.filter((p) => p.prefCode !== prefCode)
+      );
     }
   };
 
@@ -99,7 +106,9 @@ export default function PrefList({
               // 選択状況は Main のステートを参照
               isChecked={isChecked(pref.code)}
               // 親コンポーネントに「どうなったか」を伝える
-              onChange={(checked) => handleChange(pref.code, pref.name, checked)}
+              onChange={(checked) =>
+                handleChange(pref.code, pref.name, checked)
+              }
             />
           </li>
         ))}
