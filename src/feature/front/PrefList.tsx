@@ -2,7 +2,8 @@ import CheckItem from "../../components/CheckItem";
 import { fetchPopulation } from "../../api/population";
 import { setRandomColor } from "../../utils/chartOptions";
 import { useEffect, useState } from "react";
-import { prefectures } from "../../utils/mock";
+import { prefectures as mockPrefectures } from "../../utils/mock";
+import { fetchPrefectures } from "../../api/prefectures";
 
 export default function PrefList({
   selectedPrefCodes,
@@ -10,11 +11,21 @@ export default function PrefList({
   setPopulationList,
 }: PrefListProps) {
   const [existingColorList, setExistingColorList] = useState<string[]>([]);
+  const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
 
   useEffect(() => {
-    // デバッグ用
-    console.log("existingColorList：", existingColorList);
-  }, [existingColorList]);
+    // 都道府県リストの取得
+    const fetchData = async () => {
+      try {
+        const data = await fetchPrefectures();
+        setPrefectures(data);
+      } catch (error: any) {
+        console.error("fetchエラー", error.message);
+        setPrefectures(mockPrefectures);
+      }
+    };
+    fetchData();
+  }, []);
 
   // チェック切り替えハンドラ
   const handleChange = async (
@@ -63,13 +74,13 @@ export default function PrefList({
     <div>
       <ul className="l-prefList">
         {prefectures.map((pref) => (
-          <li key={pref.code} className="l-prefList__item">
+          <li key={pref.prefCode} className="l-prefList__item">
             <CheckItem
-              id={`check-${pref.code}`}
-              name={pref.name}
-              isChecked={isChecked(pref.code)}
+              id={`check-${pref.prefCode}`}
+              name={pref.prefName}
+              isChecked={isChecked(pref.prefCode)}
               onChange={(checked) =>
-                handleChange(pref.code, pref.name, checked)
+                handleChange(pref.prefCode, pref.prefName, checked)
               }
             />
           </li>

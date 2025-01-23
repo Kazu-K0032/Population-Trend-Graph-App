@@ -1,4 +1,3 @@
-// src/components/CheckItem.tsx
 import { useState, useEffect } from "react";
 
 export default function CheckItem({
@@ -16,7 +15,7 @@ export default function CheckItem({
   const handleCheckboxChange = () => {
     const newChecked = !isChecked;
     setIsChecked(newChecked);
-    onChange(newChecked); // 親に「チェックした」「外した」を通知
+    onChange(newChecked);
   };
 
   return (
