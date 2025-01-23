@@ -24,57 +24,48 @@ ChartJS.register(
 );
 
 export default function Main() {
-  // 選択している都道府県コードの配列
+  // 選択された都道府県コードの配列
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
-  // グラフデータ
-  const [chartDatasets, setChartDatasets] = useState<PopulationData[]>([]);
 
-  console.log("選択されたコード", selectedPrefCodes);
-  console.log("総人口：", populationList);
-
-  const sampleDatasets = [
-    {
-      label: "北海道",
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 12],
-      backgroundColor: "red",
-      borderColor: "black",
-      borderWidth: 1,
-    },
-  ];
-
-  const enphance = populationList.map((dataset) => {
+  /**
+   * グラフデータ
+   * @see - https://www.chartjs.org/docs/latest/general/colors.html#per-dataset-color-settings
+   */
+  const dataset = populationList.map((dataset) => {
     return {
       label: dataset.prefName,
       data: dataset.data.map((item) => item.value),
-      backgroundColor: "red",
-      borderColor: "black",
-      borderWidth: 1,
+      backgroundColor: dataset.color,
+      borderColor: dataset.color,
+      borderWidth: 2,
     };
   });
-
-  // グラフデータ
   const data = {
-    labels: populationList ? populationList[0]?.data?.map((item) => item.year) : ["1", "2"], // X軸ラベル
-    datasets: enphance,
+    labels: populationList[0]?.data?.map((item) => item.year),
+    datasets: dataset,
   };
 
-  // グラフオプション
+  /**
+   * グラフオプションの設定
+   * @see - https://www.chartjs.org/docs/latest/api/interfaces/CoreChartOptions.html
+   */
   const options = {
     responsive: true, // レスポンシブ対応
-    plugins: {
-      legend: {
-        display: true, // 凡例を表示
-        position: "top" as const,
-      },
-      tooltip: {
-        enabled: true, // ツールチップを有効化
-      },
+    animation: {
+      duration: 500, // アニメーション時間(ms)
+      easing: "easeInOutQuad",
+      loop: false, // アニメーションをループしない
+    },
+    hover: {
+      mode: "nearest", // マウスカーソルに最も近いデータポイントをハイライト
+      intersect: false, // マウスオーバー付近のデータをハイライト
+      animationDuration: 300, // アニメーション時間(ms)
     },
     scales: {
       y: {
-        beginAtZero: true, // Y軸の最小値を0に設定
+        beginAtZero: true, // Y軸の最小値[true=0]
       },
     },
   };
@@ -89,7 +80,6 @@ export default function Main() {
               <PrefList
                 selectedPrefCodes={selectedPrefCodes}
                 setSelectedPrefCodes={setSelectedPrefCodes}
-                populationList={populationList}
                 setPopulationList={setPopulationList}
               />
             </section>

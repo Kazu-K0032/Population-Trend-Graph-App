@@ -20,11 +20,11 @@ type PopulationData = {
   prefCode: number;
   prefName: string;
   data: YearValue[];
+  color: string;
 };
 
 type PrefListProps = {
   selectedPrefCodes: number[];
   setSelectedPrefCodes: Dispatch<SetStateAction<number[]>>;
-  populationList: PopulationData[];
   setPopulationList: Dispatch<SetStateAction<PopulationData[]>>;
 };
