@@ -50,6 +50,19 @@
   max-width: 100%;
   height: 400px;
   width: 100%;
+  transform: none;
+}
+
+.l-selector {
+  grid-template-columns: 120px 1fr;
+  max-width: 400px;
+  margin-bottom: 12px;
+  .l-selector__label {
+  }
+  .l-selector__wrapper {
+  }
+  .l-selector__select {
+  }
 }
 
 // ==============================================

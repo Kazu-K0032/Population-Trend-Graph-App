@@ -9,10 +9,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
 import PrefList from "../feature/front/PrefList";
-import { chartOptions, getDataset } from "../utils/chartOptions";
-import SelectItem from "../components/SelectItem";
+import CustomSelector from "../feature/CustomSelector";
+import * as React from "react";
+import ModeChart from "../feature/ModeChart";
 
 ChartJS.register(
   CategoryScale,
@@ -29,8 +29,11 @@ export default function Main() {
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
-  // グラフ化するために必要なデータセット
-  const dataset = getDataset(populationList);
+  // グラフモードを管理する
+  const [sortOption, setSortOption] = useState<string>("");
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(event.target.value);
+  };
 
   return (
     <div>
@@ -50,37 +53,47 @@ export default function Main() {
             {selectedPrefCodes.length > 0 ? (
               <section className="l-section">
                 <h2 className="c-mainTtl">グラフ</h2>
-                <SelectItem
-                  name="mode"
-                  optionList={[
-                    { value: "total-population", name: "総人口" },
-                    { value: "juvenile-population", name: "年少人口" },
-                    { value: "working-age-population", name: "生産年齢人口" },
-                    { value: "elderly-population", name: "老年人口" },
+                <CustomSelector<SelectItemProps>
+                  id="mode-select"
+                  label="モード"
+                  value={sortOption}
+                  options={[
+                    { label: "総人口", value: "total-population" },
+                    { label: "年少人口", value: "juvenile-population" },
+                    { label: "生産年齢人口", value: "working-age-population" },
+                    { label: "老年人口", value: "elderly-population" },
                   ]}
-                  initOption={{ value: "total-population", name: "総人口" }}
+                  onChange={handleSortChange}
+                  getOptionLabel={(option) => option.label}
+                  getOptionValue={(option) => option.value}
+                  wrapperClassName="l-selector"
+                  className="l-selector__select"
                 />
                 <div>
-                  <SelectItem
-                    name="mode"
-                    optionList={[
-                      { value: "total-population", name: "総人口" },
-                      { value: "juvenile-population", name: "年少人口" },
-                      { value: "working-age-population", name: "生産年齢人口" },
-                      { value: "elderly-population", name: "老年人口" },
-                    ]}
-                    initOption={{ value: "total-population", name: "総人口" }}
-                  />
-                  <Line
-                    data={dataset}
-                    options={chartOptions}
-                    className="l-chart"
+                  <ModeChart
+                    populationList={populationList}
                   />
                 </div>
               </section>
             ) : (
               <section className="l-section">
                 <h2 className="c-mainTtl">都道府県を選択してください</h2>
+                <CustomSelector<SelectItemProps>
+                  id="mode-select"
+                  label="モード"
+                  value={sortOption}
+                  options={[
+                    { label: "総人口", value: "total-population" },
+                    { label: "年少人口", value: "juvenile-population" },
+                    { label: "生産年齢人口", value: "working-age-population" },
+                    { label: "老年人口", value: "elderly-population" },
+                  ]}
+                  onChange={handleSortChange}
+                  getOptionLabel={(option) => option.label}
+                  getOptionValue={(option) => option.value}
+                  wrapperClassName="l-selector"
+                  className="l-selector__select"
+                />
               </section>
             )}
           </div>

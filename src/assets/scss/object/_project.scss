@@ -2,6 +2,30 @@
 @use "../foundation/_base";
 @use "../foundation/_variables" as *;
 
+.p-selector {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  &::after {
+    // 矢印
+    content: "▼";
+    font-size: 10px;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .p-selector__label {
+  }
+
+  .p-selector__option {
+  }
+}
+
 // ==============================================
 // MEDIUM
 // ==============================================
