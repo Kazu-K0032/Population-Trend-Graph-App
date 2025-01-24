@@ -1,0 +1,32 @@
+@use "../foundation/_reset";
+@use "../foundation/_base";
+@use "../foundation/_variables" as *;
+
+.l-footer {
+  width: 100%;
+  background-color: $corp;
+  .l-footer__inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8px 0;
+  }
+}
+
+// ==============================================
+// MEDIUM
+// ==============================================
+@media screen and (width <= 1024px) {
+  .l-footer {
+    .l-footer__inner {
+      max-width: none;
+      margin: 0;
+    }
+  }
+}
+
+// ==============================================
+// SMALL 最低保証375px
+// ==============================================
+@media screen and (width <= 649px) {
+}
