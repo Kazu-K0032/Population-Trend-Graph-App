@@ -12,6 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import PrefList from "../feature/front/PrefList";
 import { chartOptions, getDataset } from "../utils/chartOptions";
+import SelectItem from "../components/SelectItem";
 
 ChartJS.register(
   CategoryScale,
@@ -49,7 +50,27 @@ export default function Main() {
             {selectedPrefCodes.length > 0 ? (
               <section className="l-section">
                 <h2 className="c-mainTtl">グラフ</h2>
+                <SelectItem
+                  name="mode"
+                  optionList={[
+                    { value: "total-population", name: "総人口" },
+                    { value: "juvenile-population", name: "年少人口" },
+                    { value: "working-age-population", name: "生産年齢人口" },
+                    { value: "elderly-population", name: "老年人口" },
+                  ]}
+                  initOption={{ value: "total-population", name: "総人口" }}
+                />
                 <div>
+                  <SelectItem
+                    name="mode"
+                    optionList={[
+                      { value: "total-population", name: "総人口" },
+                      { value: "juvenile-population", name: "年少人口" },
+                      { value: "working-age-population", name: "生産年齢人口" },
+                      { value: "elderly-population", name: "老年人口" },
+                    ]}
+                    initOption={{ value: "total-population", name: "総人口" }}
+                  />
                   <Line
                     data={dataset}
                     options={chartOptions}

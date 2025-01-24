@@ -23,12 +23,3 @@ type PrefListProps = {
   setPopulationList: Dispatch<SetStateAction<PopulationData[]>>;
   addClass?: string;
 };
-
-// チェックボックスの型
-type CheckItemProps = {
-  id: string;
-  name: string;
-  isChecked: boolean;
-  addClass?: string;
-  onChange: (checked: boolean) => void;
-};
