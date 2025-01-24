@@ -9,8 +9,9 @@
   background-color: $bg;
 
   .l-main__inner {
-    border: 1px solid #000;
+    // border: 1px solid #000;
     max-width: 1000px;
+    min-width: 1000px;
   }
 }
 
@@ -23,13 +24,33 @@
 .l-section {
   display: flex;
   flex-direction: column;
+  row-gap: 8px;
+  margin-bottom: 12px;
 }
 
 .l-prefList {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  flex-wrap: wrap;
   gap: 8px;
+
+  &.--homePage {
+    // ホームページで設置した都道府県一覧
+    padding-left: 10px;
+  }
+
+  .l-prefList__item {
+  }
+
+  .l-prefList__checkBox {
+  }
+}
+
+.l-chart {
+  min-height: 150px;
+  max-width: 100%;
+  height: 400px;
+  width: 100%;
+  transform: none;
 }
 
 // ==============================================
@@ -42,22 +63,41 @@
       display: flex;
       flex-direction: column;
       row-gap: 52px;
+      min-width: calc(650px - (40px + 40px));
     }
   }
 
   .l-prefList {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .l-chart {
+    height: 300px;
+    width: calc(650px - (40px + 40px));
+  }
 }
 
 // ==============================================
-// SMALL
+// SMALL 最低保証375px
 // ==============================================
 @media screen and (width <= 649px) {
   .l-main {
     padding: 40px 20px 100px;
+    min-width: auto;
+
+    .l-main__inner {
+      min-width: auto;
+    }
   }
   .l-prefList {
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: none;
+    gap: 8px;
+  }
+
+  .l-chart {
+    height: 300px;
+    width: auto;
   }
 }

@@ -1,6 +1,6 @@
 import CheckItem from "../../components/CheckItem";
 import { fetchPopulation } from "../../api/population";
-import { setRandomColor } from "../../utils/chartOptions";
+import { setRandomColor } from "../../utils/setRandomColor";
 import { useEffect, useState } from "react";
 import { prefectures as mockPrefectures } from "../../utils/mock";
 import { fetchPrefectures } from "../../api/prefectures";
@@ -9,9 +9,11 @@ export default function PrefList({
   selectedPrefCodes,
   setSelectedPrefCodes,
   setPopulationList,
+  addClass = "",
 }: PrefListProps) {
   const [existingColorList, setExistingColorList] = useState<string[]>([]);
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
+  addClass = addClass !== "" ? " " + addClass : "";
 
   useEffect(() => {
     // 都道府県リストの取得
@@ -54,8 +56,6 @@ export default function PrefList({
       } catch (err) {
         console.error("人口データ取得に失敗しました", err);
       }
-
-      // カラー
     } else {
       // チェックが OFF になった
       setSelectedPrefCodes((prev: number[]) =>
@@ -71,21 +71,20 @@ export default function PrefList({
   const isChecked = (prefCode: number) => selectedPrefCodes.includes(prefCode);
 
   return (
-    <div>
-      <ul className="l-prefList">
-        {prefectures.map((pref) => (
-          <li key={pref.prefCode} className="l-prefList__item">
-            <CheckItem
-              id={`check-${pref.prefCode}`}
-              name={pref.prefName}
-              isChecked={isChecked(pref.prefCode)}
-              onChange={(checked) =>
-                handleChange(pref.prefCode, pref.prefName, checked)
-              }
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={`l-prefList${addClass}`}>
+      {prefectures.map((pref) => (
+        <li key={pref.prefCode} className="l-prefList__item">
+          <CheckItem
+            id={`check-${pref.prefCode}`}
+            name={pref.prefName}
+            isChecked={isChecked(pref.prefCode)}
+            addClass="l-prefList__checkBox"
+            onChange={(checked) =>
+              handleChange(pref.prefCode, pref.prefName, checked)
+            }
+          />
+        </li>
+      ))}
+    </ul>
   );
 }

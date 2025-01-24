@@ -11,8 +11,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import PrefList from "../feature/front/PrefList";
+import { chartOptions, getDataset } from "../utils/chartOptions";
 
-// Chart.jsのコンポーネントを登録（コンポーネント外で実行）
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -28,47 +28,8 @@ export default function Main() {
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
-
-  /**
-   * グラフデータ
-   * @see - https://www.chartjs.org/docs/latest/general/colors.html#per-dataset-color-settings
-   */
-  const dataset = populationList.map((dataset) => {
-    return {
-      label: dataset.prefName,
-      data: dataset.data.map((item) => item.value),
-      backgroundColor: dataset.color,
-      borderColor: dataset.color,
-      borderWidth: 2,
-    };
-  });
-  const data = {
-    labels: populationList[0]?.data?.map((item) => item.year),
-    datasets: dataset,
-  };
-
-  /**
-   * グラフオプションの設定
-   * @see - https://www.chartjs.org/docs/latest/api/interfaces/CoreChartOptions.html
-   */
-  const options = {
-    responsive: true, // レスポンシブ対応
-    animation: {
-      duration: 500, // アニメーション時間(ms)
-      easing: "easeInOutQuad",
-      loop: false, // アニメーションをループしない
-    },
-    hover: {
-      mode: "nearest", // マウスカーソルに最も近いデータポイントをハイライト
-      intersect: false, // マウスオーバー付近のデータをハイライト
-      animationDuration: 300, // アニメーション時間(ms)
-    },
-    scales: {
-      y: {
-        beginAtZero: true, // Y軸の最小値[true=0]
-      },
-    },
-  };
+  // グラフ化するために必要なデータセット
+  const dataset = getDataset(populationList);
 
   return (
     <div>
@@ -81,15 +42,26 @@ export default function Main() {
                 selectedPrefCodes={selectedPrefCodes}
                 setSelectedPrefCodes={setSelectedPrefCodes}
                 setPopulationList={setPopulationList}
+                addClass="--homePage"
               />
             </section>
 
-            <section className="l-section">
-              <h2 className="c-mainTtl">グラフ</h2>
-              <div>
-                <Line data={data} options={options} />
-              </div>
-            </section>
+            {selectedPrefCodes.length > 0 ? (
+              <section className="l-section">
+                <h2 className="c-mainTtl">グラフ</h2>
+                <div>
+                  <Line
+                    data={dataset}
+                    options={chartOptions}
+                    className="l-chart"
+                  />
+                </div>
+              </section>
+            ) : (
+              <section className="l-section">
+                <h2 className="c-mainTtl">都道府県を選択してください</h2>
+              </section>
+            )}
           </div>
         </div>
       </main>

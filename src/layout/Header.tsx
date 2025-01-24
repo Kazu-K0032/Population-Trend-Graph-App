@@ -5,7 +5,7 @@ export default function Header() {
         <div className="l-header__inner">
           <div className="l-headerTtl">
             <h1 className="l-headerTtl__ttl">
-              ゆめみフロントエンドコーディング試験
+              都道府県別の総人口推移グラフ表示アプリ
             </h1>
           </div>
         </div>

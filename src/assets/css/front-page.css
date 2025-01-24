@@ -304,26 +304,19 @@ html {
 }
 .l-footer {
   width: 100%;
-  border-top: 4px solid #005ea4;
-  background-color: #fff;
+  background-color: #005ea4;
 }
 .l-footer .l-footer__inner {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 56px 0;
+  padding: 8px 0;
 }
 
 @media screen and (width <= 1024px) {
   .l-footer .l-footer__inner {
     max-width: none;
     margin: 0;
-    padding: 56px 40px;
-  }
-}
-@media screen and (width <= 649px) {
-  .l-footer .l-footer__inner {
-    padding: 56px 20px;
   }
 }
 .l-main {
@@ -333,8 +326,8 @@ html {
   background-color: #f4fbff;
 }
 .l-main .l-main__inner {
-  border: 1px solid #000;
   max-width: 1000px;
+  min-width: 1000px;
 }
 
 .l-sectionWrap {
@@ -346,13 +339,24 @@ html {
 .l-section {
   display: flex;
   flex-direction: column;
+  row-gap: 8px;
+  margin-bottom: 12px;
 }
 
 .l-prefList {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  flex-wrap: wrap;
   gap: 8px;
+}
+.l-prefList.--homePage {
+  padding-left: 10px;
+}
+.l-chart {
+  min-height: 150px;
+  max-width: 100%;
+  height: 400px;
+  width: 100%;
+  transform: none;
 }
 
 @media screen and (width <= 1024px) {
@@ -363,28 +367,61 @@ html {
     display: flex;
     flex-direction: column;
     row-gap: 52px;
+    min-width: 570px;
   }
   .l-prefList {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .l-chart {
+    height: 300px;
+    width: 570px;
   }
 }
 @media screen and (width <= 649px) {
   .l-main {
     padding: 40px 20px 100px;
+    min-width: auto;
+  }
+  .l-main .l-main__inner {
+    min-width: auto;
   }
   .l-prefList {
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: none;
+    gap: 8px;
+  }
+  .l-chart {
+    height: 300px;
+    width: auto;
   }
 }
 .c-mainTtl {
   position: relative;
-  margin-bottom: 28px;
-  padding-bottom: 19px;
+  display: block;
+  padding: 0 0 12px 8px;
   color: #0e375c;
   font-size: 2.6rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.06em;
+}
+.c-mainTtl::before {
+  content: "";
+  border: 2px solid #005ea4;
+  margin-right: 8px;
+}
+
+.c-middleTtl {
+  color: #0e375c;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.c-middleTtl.--footer {
+  color: #fff;
+  text-align: center;
 }
 
 .c-check {
@@ -420,5 +457,13 @@ html {
 @media screen and (width <= 649px) {
   .c-mainTtl {
     font-size: 2rem;
+  }
+  .c-check .c-check__box {
+    height: 10px;
+    width: 10px;
+  }
+  .c-check .c-check__label {
+    font-size: 1.4rem;
+    padding-left: 2px;
   }
 }

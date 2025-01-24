@@ -4,13 +4,12 @@
 
 .l-footer {
   width: 100%;
-  border-top: 4px solid $corp;
-  background-color: #fff;
+  background-color: $corp;
   .l-footer__inner {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 56px 0;
+    padding: 8px 0;
   }
 }
 
@@ -22,18 +21,12 @@
     .l-footer__inner {
       max-width: none;
       margin: 0;
-      padding: 56px 40px;
     }
   }
 }
 
 // ==============================================
-// SMALL
+// SMALL 最低保証375px
 // ==============================================
 @media screen and (width <= 649px) {
-  .l-footer {
-    .l-footer__inner {
-      padding: 56px 20px;
-    }
-  }
 }

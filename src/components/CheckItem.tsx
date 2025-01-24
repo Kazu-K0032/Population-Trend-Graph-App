@@ -4,6 +4,7 @@ export default function CheckItem({
   id,
   name,
   isChecked: initialChecked,
+  addClass = "",
   onChange,
 }: CheckItemProps) {
   const [isChecked, setIsChecked] = useState(initialChecked);
@@ -18,8 +19,10 @@ export default function CheckItem({
     onChange(newChecked);
   };
 
+  addClass = addClass !== "" ? addClass + " " : ""
+
   return (
-    <div className={`c-check${isChecked ? " --checked" : ""}`}>
+    <div className={`${addClass}c-check${isChecked ? " --checked" : ""}`}>
       <input
         type="checkbox"
         id={id}
@@ -28,7 +31,10 @@ export default function CheckItem({
         onChange={handleCheckboxChange}
         className="c-check__box"
       />
-      <label htmlFor={id} className="c-check__label">
+      <label
+        htmlFor={id}
+        className='c-check__label'
+      >
         {name}
       </label>
     </div>
