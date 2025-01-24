@@ -5,7 +5,7 @@ interface CustomSelectorProps<T> {
   id: string; // ラベルやセレクターに付与するID
   label: string; // セクションタイトル等に使うラベル
   value: string | number | undefined; // 現在選択されている値
-  options: T[]; // 選択肢リスト（チャンネルやソートオプションなど）
+  options: T[];
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void; // セレクトタグの onChange イベントハンドラ
   getOptionLabel: (option: T) => string; // オプション表示用の文字列を取得する関数
   getOptionValue: (option: T) => string | number; // オプションの value 属性を取得する関数

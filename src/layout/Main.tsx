@@ -13,6 +13,7 @@ import PrefList from "../feature/front/PrefList";
 import CustomSelector from "../feature/CustomSelector";
 import * as React from "react";
 import ModeChart from "../feature/ModeChart";
+import { modeList } from "../utils/chartOptions";
 
 ChartJS.register(
   CategoryScale,
@@ -30,11 +31,12 @@ export default function Main() {
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
   // グラフモードを管理する
-  const [sortOption, setSortOption] = useState<string>("");
+  const [sortOption, setSortOption] = useState<Mode>("総人口");
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(event.target.value);
+    const value = event.target.value as Mode;
+    console.log("graphMode", value);
+    setSortOption(value);
   };
-
   return (
     <div>
       <main className="l-main">
@@ -52,17 +54,15 @@ export default function Main() {
 
             {selectedPrefCodes.length > 0 ? (
               <section className="l-section">
-                <h2 className="c-mainTtl">グラフ</h2>
+                <h2 className="c-mainTtl">グラフ ({sortOption})</h2>
                 <CustomSelector<SelectItemProps>
                   id="mode-select"
                   label="モード"
                   value={sortOption}
-                  options={[
-                    { label: "総人口", value: "total-population" },
-                    { label: "年少人口", value: "juvenile-population" },
-                    { label: "生産年齢人口", value: "working-age-population" },
-                    { label: "老年人口", value: "elderly-population" },
-                  ]}
+                  options={modeList.map((mode) => ({
+                    label: mode,
+                    value: mode,
+                  }))}
                   onChange={handleSortChange}
                   getOptionLabel={(option) => option.label}
                   getOptionValue={(option) => option.value}
@@ -72,6 +72,7 @@ export default function Main() {
                 <div>
                   <ModeChart
                     populationList={populationList}
+                    mode={sortOption}
                   />
                 </div>
               </section>
@@ -82,12 +83,10 @@ export default function Main() {
                   id="mode-select"
                   label="モード"
                   value={sortOption}
-                  options={[
-                    { label: "総人口", value: "total-population" },
-                    { label: "年少人口", value: "juvenile-population" },
-                    { label: "生産年齢人口", value: "working-age-population" },
-                    { label: "老年人口", value: "elderly-population" },
-                  ]}
+                  options={modeList.map((mode) => ({
+                    label: mode,
+                    value: mode,
+                  }))}
                   onChange={handleSortChange}
                   getOptionLabel={(option) => option.label}
                   getOptionValue={(option) => option.value}
