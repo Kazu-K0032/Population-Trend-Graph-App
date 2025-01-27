@@ -43,6 +43,23 @@ export default function Main() {
         <div className="l-main__inner">
           <div className="l-sectionWrap">
             <section className="l-section">
+              <h2 className="c-mainTtl">モード</h2>
+              <CustomSelector<SelectItemProps>
+                id="mode-select"
+                label="モード"
+                value={sortOption}
+                options={modeList.map((mode) => ({
+                  label: mode,
+                  value: mode,
+                }))}
+                onChange={handleSortChange}
+                getOptionLabel={(option) => option.label}
+                getOptionValue={(option) => option.value}
+                wrapperClassName="l-selector"
+                className="l-selector__select"
+              />
+            </section>
+            <section className="l-section">
               <h2 className="c-mainTtl">都道府県</h2>
               <PrefList
                 selectedPrefCodes={selectedPrefCodes}
@@ -52,23 +69,9 @@ export default function Main() {
               />
             </section>
 
-            {selectedPrefCodes.length > 0 ? (
+            {selectedPrefCodes.length > 0 && populationList.length > 0 ? (
               <section className="l-section">
-                <h2 className="c-mainTtl">グラフ ({sortOption})</h2>
-                <CustomSelector<SelectItemProps>
-                  id="mode-select"
-                  label="モード"
-                  value={sortOption}
-                  options={modeList.map((mode) => ({
-                    label: mode,
-                    value: mode,
-                  }))}
-                  onChange={handleSortChange}
-                  getOptionLabel={(option) => option.label}
-                  getOptionValue={(option) => option.value}
-                  wrapperClassName="l-selector"
-                  className="l-selector__select"
-                />
+                <h2 className="c-mainTtl">グラフ</h2>
                 <div>
                   <ModeChart
                     populationList={populationList}
@@ -79,20 +82,6 @@ export default function Main() {
             ) : (
               <section className="l-section">
                 <h2 className="c-mainTtl">都道府県を選択してください</h2>
-                <CustomSelector<SelectItemProps>
-                  id="mode-select"
-                  label="モード"
-                  value={sortOption}
-                  options={modeList.map((mode) => ({
-                    label: mode,
-                    value: mode,
-                  }))}
-                  onChange={handleSortChange}
-                  getOptionLabel={(option) => option.label}
-                  getOptionValue={(option) => option.value}
-                  wrapperClassName="l-selector"
-                  className="l-selector__select"
-                />
               </section>
             )}
           </div>
