@@ -1,42 +1,19 @@
 import { useState } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import PrefList from "../feature/front/PrefList";
 import CustomSelector from "../feature/CustomSelector";
-import * as React from "react";
-import ModeChart from "../feature/ModeChart";
+import TotalPopulation from "./TotalPopulation";
 import { modeList } from "../utils/chartOptions";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
 export default function Main() {
-  // 選択された都道府県コードの配列
-  const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
-  // 選択された都道府県の人口データ一覧
-  const [populationList, setPopulationList] = useState<PopulationData[]>([]);
-  // グラフモードを管理する
+  // グラフモードの管理
   const [sortOption, setSortOption] = useState<Mode>("総人口");
+
+  // モードハンドリング
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as Mode;
-    console.log("graphMode", value);
+    // console.log("graphMode", value);
     setSortOption(value);
   };
+
   return (
     <div>
       <main className="l-main">
@@ -59,31 +36,8 @@ export default function Main() {
                 className="l-selector__select"
               />
             </section>
-            <section className="l-section">
-              <h2 className="c-mainTtl">都道府県</h2>
-              <PrefList
-                selectedPrefCodes={selectedPrefCodes}
-                setSelectedPrefCodes={setSelectedPrefCodes}
-                setPopulationList={setPopulationList}
-                addClass="--homePage"
-              />
-            </section>
 
-            {selectedPrefCodes.length > 0 && populationList.length > 0 ? (
-              <section className="l-section">
-                <h2 className="c-mainTtl">グラフ</h2>
-                <div>
-                  <ModeChart
-                    populationList={populationList}
-                    mode={sortOption}
-                  />
-                </div>
-              </section>
-            ) : (
-              <section className="l-section">
-                <h2 className="c-mainTtl">都道府県を選択してください</h2>
-              </section>
-            )}
+            {sortOption === "総人口" && <TotalPopulation mode={sortOption} />}
           </div>
         </div>
       </main>
