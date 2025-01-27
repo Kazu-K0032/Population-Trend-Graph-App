@@ -3,7 +3,7 @@ export default function Footer() {
     <div>
       <footer className="l-footer">
         <div className="l-footer__inner">
-          <p className="c-middleTtl --footer">kazuaki.kuji</p>
+          <p className="c-mdTtl --footer">kazuaki.kuji</p>
         </div>
       </footer>
     </div>

@@ -2,10 +2,10 @@
 @use "../foundation/_base";
 @use "../foundation/_variables" as *;
 
-.c-mainTtl {
+.c-lgTtl {
   position: relative;
   display: block;
-  padding: 0 0 12px 8px;
+  padding: 0 0 0 10px;
   color: $title;
   font-size: 2.6rem;
   font-weight: 700;
@@ -15,12 +15,17 @@
   &::before {
     // タイトルの左側のスタイル
     content: "";
-    border: 2px solid $corp;
-    margin-right: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: $corp;
+    margin-right: 10px;
   }
 }
 
-.c-middleTtl {
+.c-mdTtl {
   color: $title;
   font-size: 1.8rem;
   font-weight: 500;
@@ -68,18 +73,18 @@
 
 .c-select {
   border: 1px solid #000;
-  padding: 4px 0 4px 4px;
+  padding-left: 4px;
   display: inline-block;
+  appearance: none;
+  font-size: 1.8rem;
+  line-height: 2.8rem;
 
-  &::after {
-    // 矢印
-    content: "▼";
-    font-size: 10px;
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
+  border: 1px solid #000;
+  appearance: none;
+  font-weight: 700;
+  color: $font;
+
+  .c-select__option {
   }
 }
 
@@ -105,7 +110,7 @@
 // SMALL 最低保証375px
 // ==============================================
 @media screen and (width <= 649px) {
-  .c-mainTtl {
+  .c-lgTtl {
     font-size: 2rem;
   }
 

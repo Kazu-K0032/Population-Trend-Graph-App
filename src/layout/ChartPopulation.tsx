@@ -12,6 +12,8 @@ import {
   Legend,
 } from "chart.js";
 import { fetchPopulation } from "../api/population";
+import CustomSelector from "../feature/CustomSelector";
+import { modeList } from "../utils/chartOptions";
 
 ChartJS.register(
   CategoryScale,
@@ -23,15 +25,20 @@ ChartJS.register(
   Legend
 );
 
-type ChartPopulationProps = {
-  mode: Mode;
-};
-
-export default function ChartPopulation({ mode }: ChartPopulationProps) {
+export default function ChartPopulation() {
   // 選択された都道府県コードの配列
   const [selectedPrefCodes, setSelectedPrefCodes] = useState<number[]>([]);
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
+  // グラフモードの管理
+  const [mode, setMode] = useState<Mode>("総人口");
+
+  // モードハンドリング
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value as Mode;
+    // console.log("graphMode", value);
+    setMode(value);
+  };
 
   useEffect(() => {
     if (selectedPrefCodes.length === 0) return;
@@ -59,7 +66,7 @@ export default function ChartPopulation({ mode }: ChartPopulationProps) {
   return (
     <>
       <section className="l-section">
-        <h2 className="c-mainTtl">都道府県</h2>
+        <h2 className="c-lgTtl">都道府県</h2>
         <PrefList
           selectedPrefCodes={selectedPrefCodes}
           setSelectedPrefCodes={setSelectedPrefCodes}
@@ -71,14 +78,40 @@ export default function ChartPopulation({ mode }: ChartPopulationProps) {
 
       {selectedPrefCodes.length > 0 && populationList.length > 0 ? (
         <section className="l-section">
-          <h2 className="c-mainTtl">グラフ（{mode}）</h2>
-          <div>
-            <ModeChart populationList={populationList} mode={mode} />
-          </div>
+          <h2 className="c-lgTtl">グラフ（{mode}）</h2>
+          <CustomSelector<SelectItemProps>
+            id="mode-select"
+            label="モード"
+            value={mode}
+            options={modeList.map((mode) => ({
+              label: mode,
+              value: mode,
+            }))}
+            onChange={handleSortChange}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+            wrapperClassName="l-selector"
+            className="l-selector__select"
+          />
+          <ModeChart populationList={populationList} mode={mode} />
         </section>
       ) : (
         <section className="l-section">
-          <h2 className="c-mainTtl">都道府県を選択してください</h2>
+          <h2 className="c-lgTtl">都道府県を選択してください</h2>
+          <CustomSelector<SelectItemProps>
+            id="mode-select"
+            label="モード"
+            value={mode}
+            options={modeList.map((mode) => ({
+              label: mode,
+              value: mode,
+            }))}
+            onChange={handleSortChange}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+            wrapperClassName="l-selector"
+            className="l-selector__select"
+          />
         </section>
       )}
     </>

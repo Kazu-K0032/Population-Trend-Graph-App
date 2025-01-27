@@ -7,11 +7,13 @@
   align-items: center;
   width: 100%;
   position: relative;
+  grid-template-columns: auto 1fr;
+  align-items: center;
 
   &::after {
     // 矢印
     content: "▼";
-    font-size: 10px;
+    font-size: 1.6rem;
     position: absolute;
     right: 8px;
     top: 50%;
@@ -20,9 +22,14 @@
   }
 
   .p-selector__label {
+    font-size: 1.8rem;
   }
 
   .p-selector__option {
+    font-size: 1.8rem;
+    height: fit-content;
+    color: $font;
+    font-weight: 700;
   }
 }
 
