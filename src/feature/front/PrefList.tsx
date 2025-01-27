@@ -10,6 +10,7 @@ export default function PrefList({
   setSelectedPrefCodes,
   setPopulationList,
   addClass = "",
+  mode,
 }: PrefListProps) {
   const [existingColorList, setExistingColorList] = useState<string[]>([]);
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -41,7 +42,7 @@ export default function PrefList({
 
       // 人口データを取得してステートに格納
       try {
-        const popData = await fetchPopulation(prefCode);
+        const popData = await fetchPopulation(prefCode, mode);
         const color = setRandomColor();
         setExistingColorList((prevColor) => [...prevColor, color]);
         setPopulationList((prev: PopulationData[]) => [

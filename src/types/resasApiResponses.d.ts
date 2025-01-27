@@ -22,6 +22,7 @@ type PrefListProps = {
   setSelectedPrefCodes: Dispatch<SetStateAction<number[]>>;
   setPopulationList: Dispatch<SetStateAction<PopulationData[]>>;
   addClass?: string;
+  mode: Mode;
 };
 
 // モードの型

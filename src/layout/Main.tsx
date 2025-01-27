@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CustomSelector from "../feature/CustomSelector";
-import TotalPopulation from "./TotalPopulation";
 import { modeList } from "../utils/chartOptions";
+import ChartPopulation from "./ChartPopulation";
 
 export default function Main() {
   // グラフモードの管理
@@ -37,7 +37,7 @@ export default function Main() {
               />
             </section>
 
-            {sortOption === "総人口" && <TotalPopulation mode={sortOption} />}
+            <ChartPopulation mode={sortOption} />
           </div>
         </div>
       </main>
