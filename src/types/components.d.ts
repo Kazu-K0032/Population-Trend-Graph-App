@@ -7,15 +7,15 @@ type Label = {
 
 // チェックボックスの型
 type CheckItemProps = {
-  id: string;
-  name: string;
-  isChecked: boolean;
-  addClass?: string;
-  onChange: (checked: boolean) => void;
+  id: string; // inputタグのid属性およびlabelのhtmlFor属性
+  name: string; // inputタグのname属性およびlabelの値
+  isChecked: boolean; // チェックされたかどうか. trueならチェック済み
+  addClass?: string; // input, labelタグを囲うdivタグに追加するクラス名
+  onChange: (checked: boolean) => void; // チェックをトリガーとする関数
 };
 
 // セレクト タグの型
 type SelectItemProps = {
-  label: string;
-  value: string;
+  label: string; // ドロップダウンメニューで表示される文字列
+  value: string; // value 属性に設定される文字列
 };

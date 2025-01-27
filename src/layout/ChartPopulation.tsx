@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import PrefList from "../feature/front/PrefList";
-import ModeChart from "../feature/ModeChart";
+import { useEffect, useState } from 'react';
+import PrefList from '../feature/PrefList';
+import ModeChart from '../feature/ModeChart';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +10,10 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
-import { fetchPopulation } from "../api/population";
-import CustomSelector from "../feature/CustomSelector";
-import { modeList } from "../utils/chartOptions";
+} from 'chart.js';
+import { fetchPopulation } from '../api/population';
+import CustomSelector from '../feature/CustomSelector';
+import { modeList } from '../utils/chartOptions';
 
 ChartJS.register(
   CategoryScale,
@@ -22,7 +22,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export default function ChartPopulation() {
@@ -31,7 +31,7 @@ export default function ChartPopulation() {
   // 選択された都道府県の人口データ一覧
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
   // グラフモードの管理
-  const [mode, setMode] = useState<Mode>("総人口");
+  const [mode, setMode] = useState<Mode>('総人口');
 
   // モードハンドリング
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,11 +53,11 @@ export default function ChartPopulation() {
               ...item,
               data: data,
             };
-          })
+          }),
         );
         setPopulationList(updateList);
       } catch (err) {
-        console.error("モードを切り替えた時の再取得に失敗しました。", err);
+        console.error('モードを切り替えた時の再取得に失敗しました。', err);
       }
     };
     updatePopulationByMode();

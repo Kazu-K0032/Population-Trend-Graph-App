@@ -1,7 +1,7 @@
-import "../assets/css/front-page.css";
-import Footer from "../layout/Footer";
-import Header from "../layout/Header";
-import Main from "../layout/Main";
+import '../assets/css/front-page.css';
+import Footer from '../layout/Footer';
+import Header from '../layout/Header';
+import Main from '../layout/Main';
 
 function Home() {
   return (

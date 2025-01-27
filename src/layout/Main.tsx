@@ -1,4 +1,4 @@
-import ChartPopulation from "./ChartPopulation";
+import ChartPopulation from './ChartPopulation';
 export default function Main() {
   return (
     <div>
