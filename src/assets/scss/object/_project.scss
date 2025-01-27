@@ -1,23 +1,23 @@
-@use "../foundation/_reset";
-@use "../foundation/_base";
-@use "../foundation/_variables" as *;
+@use '../foundation/_reset';
+@use '../foundation/_base';
+@use '../foundation/_variables' as *;
 
 .p-selector {
   display: grid;
-  align-items: center;
-  width: 100%;
-  position: relative;
   grid-template-columns: auto 1fr;
   align-items: center;
+  position: relative;
+  width: 100%;
 
   &::after {
-    // 矢印
-    content: "▼";
-    font-size: 1.6rem;
     position: absolute;
-    right: 8px;
     top: 50%;
+    right: 8px;
     transform: translateY(-50%);
+    font-size: 1.6rem;
+
+    // 矢印
+    content: '▼';
     pointer-events: none;
   }
 
@@ -26,9 +26,9 @@
   }
 
   .p-selector__option {
-    font-size: 1.8rem;
     height: fit-content;
     color: $font;
+    font-size: 1.8rem;
     font-weight: 700;
   }
 }
