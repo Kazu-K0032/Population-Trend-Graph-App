@@ -23,8 +23,8 @@ npm ci # または npm install
 
 ```bash
 # .env.local
-REACT_APP_API_URL=https://opendata.resas-portal.go.jp
-REACT_APP_API_KEY=上記URLにて、ご自分で作成したRESASのapikeyを設定してください。
+VITE_APP_API_URL=https://opendata.resas-portal.go.jp
+VITE_APP_API_KEY=上記URLにて、ご自分で作成したRESASのapikeyを設定してください。
 ```
 
 ### 起動方法
