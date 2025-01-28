@@ -1,5 +1,5 @@
-import SelectItem from "../components/SelectItem";
-import Label from "../components/Label";
+import SelectItem from '../components/SelectItem';
+import Label from '../components/Label';
 
 interface CustomSelectorProps<T> {
   id: string; // ラベルやセレクターに付与するID
@@ -11,6 +11,7 @@ interface CustomSelectorProps<T> {
   getOptionValue: (option: T) => string | number; // オプションの value 属性を取得する関数
   className?: string; // セレクトタグの追加CSSクラス（任意）
   wrapperClassName?: string; // ラベル+セレクトを囲むラッパーのCSSクラス（任意）
+  disabled?: boolean; // ユーザーの追加操作を制御する(true - ユーザーは他の操作ができないようにする)
 }
 
 function CustomSelector<T>({
@@ -21,8 +22,9 @@ function CustomSelector<T>({
   onChange,
   getOptionLabel,
   getOptionValue,
-  className = "",
-  wrapperClassName = "",
+  className = '',
+  wrapperClassName = '',
+  disabled = false,
 }: CustomSelectorProps<T>) {
   return (
     <div className={`p-selector ${wrapperClassName}`}>
@@ -35,6 +37,7 @@ function CustomSelector<T>({
         changeHandler={onChange}
         getOptionLabel={getOptionLabel}
         getOptionValue={getOptionValue}
+        disabled={disabled}
       />
     </div>
   );

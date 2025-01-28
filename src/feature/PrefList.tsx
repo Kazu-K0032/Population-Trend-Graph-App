@@ -11,6 +11,7 @@ export default function PrefList({
   setPopulationList,
   addClass = '',
   mode,
+  loading = false,
 }: PrefListProps) {
   const [existingColorList, setExistingColorList] = useState<string[]>([]);
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
@@ -83,6 +84,7 @@ export default function PrefList({
             onChange={(checked) =>
               handleChange(pref.prefCode, pref.prefName, checked)
             }
+            disabled={loading}
           />
         </li>
       ))}

@@ -389,6 +389,13 @@ html {
   font-weight: 700;
 }
 
+@media screen and (width <= 649px) {
+  .p-selector {
+    -moz-column-gap: 8px;
+         column-gap: 8px;
+    width: 85%;
+  }
+}
 .l-header {
   display: flex;
   justify-content: center;
@@ -478,10 +485,25 @@ html {
   padding-left: 10px;
 }
 .l-chart {
+  position: relative;
+}
+.l-chart.--loading {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.l-chart .l-chart__graph {
   max-width: 100%;
   min-height: 400px;
   max-height: 500px;
   transform: none;
+}
+.l-chart .l-chart__loadingTxt {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  font-size: 3.6rem;
 }
 
 .l-selector {
@@ -503,8 +525,12 @@ html {
   .l-prefList {
     grid-template-columns: repeat(4, 1fr);
   }
-  .l-chart {
+  .l-chart .l-chart__graph {
     min-height: 300px;
+  }
+  .l-chart .l-chart__loadingTxt {
+    transform: translate(-35%, -75%);
+    font-size: 3rem;
   }
 }
 @media screen and (width <= 649px) {
@@ -521,7 +547,10 @@ html {
     grid-template-columns: none;
     gap: 8px;
   }
-  .l-chart {
-    min-height: 300px;
+  .l-chart .l-chart__loadingTxt {
+    transform: translate(-30%, -120%);
+  }
+  .l-selector {
+    grid-template-columns: auto 1fr;
   }
 }
