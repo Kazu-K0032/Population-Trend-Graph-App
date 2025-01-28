@@ -1,20 +1,21 @@
 // ============================================================================================
 // Foundation
 // ============================================================================================
-@forward "foundation/_reset";
-@forward "foundation/_base";
-@forward "foundation/_variables";
-
-// ============================================================================================
-// Layout
-// ============================================================================================
-@forward "layout/_header";
-@forward "layout/_footer";
-@forward "layout/_sidebar";
-@forward "layout/_main";
+@forward 'foundation/_reset';
+@forward 'foundation/_base';
+@forward 'foundation/_variables';
 
 // ============================================================================================
 // Object ページで使用しないものがあれば(404など)各ページ(front-page.scssなど)に移す
 // ============================================================================================
-@forward "object/_component";
-@forward "object/_project";
+@forward 'object/_component';
+@forward 'object/_project';
+
+// ============================================================================================
+// Layout
+// プロパティを上書きする場合の優先順位: layout > project > component
+// ============================================================================================
+@forward 'layout/_header';
+@forward 'layout/_footer';
+@forward 'layout/_sidebar';
+@forward 'layout/_main';

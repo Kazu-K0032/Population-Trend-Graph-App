@@ -22,13 +22,8 @@ type PrefListProps = {
   setSelectedPrefCodes: Dispatch<SetStateAction<number[]>>;
   setPopulationList: Dispatch<SetStateAction<PopulationData[]>>;
   addClass?: string;
+  mode: Mode;
 };
 
-// チェックボックスの型
-type CheckItemProps = {
-  id: string;
-  name: string;
-  isChecked: boolean;
-  addClass?: string;
-  onChange: (checked: boolean) => void;
-};
+// モードの型
+type Mode = "総人口" | "年少人口" | "生産年齢人口" | "老年人口";

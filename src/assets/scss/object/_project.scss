@@ -1,6 +1,37 @@
-@use "../foundation/_reset";
-@use "../foundation/_base";
-@use "../foundation/_variables" as *;
+@use '../foundation/_reset';
+@use '../foundation/_base';
+@use '../foundation/_variables' as *;
+
+.p-selector {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+
+    // 矢印
+    content: '▼';
+    pointer-events: none;
+  }
+
+  .p-selector__label {
+    font-size: 1.8rem;
+  }
+
+  .p-selector__option {
+    height: fit-content;
+    color: $font;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+}
 
 // ==============================================
 // MEDIUM

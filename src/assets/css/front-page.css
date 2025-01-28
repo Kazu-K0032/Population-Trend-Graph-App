@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 ::before,
 ::after {
@@ -73,7 +74,7 @@ hr {
 
 pre {
   font-size: inherit;
-  font-family: monospace, monospace;
+  font-family: monospace;
 }
 
 address {
@@ -100,7 +101,7 @@ code,
 kbd,
 samp {
   font-size: inherit;
-  font-family: monospace, monospace;
+  font-family: monospace;
 }
 
 small {
@@ -257,16 +258,142 @@ th {
 }
 
 html {
+  box-sizing: content-box;
   color: #333;
   font-size: 62.5%;
   font-family: "Noto Sans JP", sans-serif;
+}
+
+.c-lgTtl {
+  display: block;
+  position: relative;
+  padding: 0 0 0 10px;
+  color: #0e375c;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.c-lgTtl::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  margin-right: 10px;
+  background-color: #005ea4;
+  content: "";
+}
+
+.c-mdTtl {
+  color: #0e375c;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.c-mdTtl.--footer {
+  color: #fff;
+  text-align: center;
+}
+
+.c-check {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.c-check .c-check__box {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #000;
+  border-radius: 25%;
+  cursor: pointer;
+}
+.c-check .c-check__box:checked {
+  border-color: #3188ca;
+  background-color: #3188ca;
+}
+.c-check .c-check__label {
+  padding-left: 4px;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.c-check .c-check__label:hover {
+  text-decoration: underline;
+}
+
+.c-select {
+  display: inline-block;
+  padding-left: 4px;
+  border: 1px solid #000;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.8rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.c-label {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.c-label::after {
+  content: ": ";
+}
+
+@media screen and (width <= 649px) {
+  .c-lgTtl {
+    font-size: 2rem;
+  }
+  .c-check .c-check__box {
+    width: 10px;
+    height: 10px;
+  }
+  .c-check .c-check__label {
+    padding-left: 2px;
+    font-size: 1.4rem;
+  }
+}
+.p-selector {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.p-selector::after {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+  content: "▼";
+  pointer-events: none;
+}
+.p-selector .p-selector__label {
+  font-size: 1.8rem;
+}
+.p-selector .p-selector__option {
+  height: -moz-fit-content;
+  height: fit-content;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .l-header {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 90px;
+  height: 56px;
   background-color: #005ea4;
 }
 .l-header .l-header__inner {
@@ -278,15 +405,11 @@ html {
 
 .l-headerTtl .l-headerTtl__ttl {
   color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
 }
 
 @media screen and (width <= 1024px) {
   .l-header {
-    height: 56px;
+    height: 48px;
     padding: 0 40px;
   }
   .l-headerTtl .l-headerTtl__img {
@@ -294,12 +417,15 @@ html {
     height: 20px;
   }
   .l-headerTtl .l-headerTtl__ttl {
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 }
 @media screen and (width <= 649px) {
   .l-header {
     padding: 0 20px;
+  }
+  .l-headerTtl .l-headerTtl__ttl {
+    font-size: 1.6rem;
   }
 }
 .l-footer {
@@ -326,8 +452,8 @@ html {
   background-color: #f4fbff;
 }
 .l-main .l-main__inner {
-  max-width: 1000px;
   min-width: 1000px;
+  max-width: 1000px;
 }
 
 .l-sectionWrap {
@@ -339,7 +465,7 @@ html {
 .l-section {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 20px;
   margin-bottom: 12px;
 }
 
@@ -352,13 +478,18 @@ html {
   padding-left: 10px;
 }
 .l-chart {
-  min-height: 150px;
   max-width: 100%;
-  height: 400px;
-  width: 100%;
+  min-height: 400px;
+  max-height: 500px;
   transform: none;
 }
 
+.l-selector {
+  grid-template-columns: 120px 1fr;
+  max-width: 400px;
+  margin-bottom: 12px;
+  margin-left: 12px;
+}
 @media screen and (width <= 1024px) {
   .l-main {
     padding: 40px 40px 100px;
@@ -373,14 +504,13 @@ html {
     grid-template-columns: repeat(4, 1fr);
   }
   .l-chart {
-    height: 300px;
-    width: 570px;
+    min-height: 300px;
   }
 }
 @media screen and (width <= 649px) {
   .l-main {
-    padding: 40px 20px 100px;
     min-width: auto;
+    padding: 40px 20px 100px;
   }
   .l-main .l-main__inner {
     min-width: auto;
@@ -392,78 +522,6 @@ html {
     gap: 8px;
   }
   .l-chart {
-    height: 300px;
-    width: auto;
-  }
-}
-.c-mainTtl {
-  position: relative;
-  display: block;
-  padding: 0 0 12px 8px;
-  color: #0e375c;
-  font-size: 2.6rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
-}
-.c-mainTtl::before {
-  content: "";
-  border: 2px solid #005ea4;
-  margin-right: 8px;
-}
-
-.c-middleTtl {
-  color: #0e375c;
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
-}
-.c-middleTtl.--footer {
-  color: #fff;
-  text-align: center;
-}
-
-.c-check {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-.c-check .c-check__box {
-  height: 15px;
-  width: 15px;
-  border-radius: 25%;
-  border: 1px solid #000;
-  cursor: pointer;
-}
-.c-check .c-check__box:checked {
-  border-color: #3188ca;
-  background-color: #3188ca;
-}
-.c-check .c-check__label {
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
-  padding-left: 4px;
-}
-.c-check .c-check__label:hover {
-  text-decoration: underline;
-}
-
-@media screen and (width <= 649px) {
-  .c-mainTtl {
-    font-size: 2rem;
-  }
-  .c-check .c-check__box {
-    height: 10px;
-    width: 10px;
-  }
-  .c-check .c-check__label {
-    font-size: 1.4rem;
-    padding-left: 2px;
+    min-height: 300px;
   }
 }

@@ -1,4 +1,12 @@
-import { ChartOptions } from "chart.js";
+import { ChartData, ChartOptions } from "chart.js";
+
+// RESAS API で提供されているモード
+export const modeList: Mode[] = [
+  "総人口",
+  "年少人口",
+  "生産年齢人口",
+  "老年人口",
+];
 
 /**
  * グラフオプションの設定
@@ -110,7 +118,10 @@ export const chartOptions: ChartOptions<"line"> = {
  * グラフデータ
  * @see - https://www.chartjs.org/docs/latest/general/colors.html#per-dataset-color-settings
  */
-export function getDataset(populationList: PopulationData[]) {
+export function getDataset(
+  populationList: PopulationData[],
+  mode: Mode
+): ChartData<"line"> {
   return {
     labels: populationList[0]?.data?.map((item) => item.year),
     datasets: populationList.map((dataset) => {

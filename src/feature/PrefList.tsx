@@ -1,19 +1,20 @@
-import CheckItem from "../../components/CheckItem";
-import { fetchPopulation } from "../../api/population";
-import { setRandomColor } from "../../utils/setRandomColor";
-import { useEffect, useState } from "react";
-import { prefectures as mockPrefectures } from "../../utils/mock";
-import { fetchPrefectures } from "../../api/prefectures";
+import CheckItem from '../components/CheckItem';
+import { fetchPopulation } from '../api/population';
+import { setRandomColor } from '../utils/setRandomColor';
+import { useEffect, useState } from 'react';
+import { prefectures as mockPrefectures } from '../utils/mock';
+import { fetchPrefectures } from '../api/prefectures';
 
 export default function PrefList({
   selectedPrefCodes,
   setSelectedPrefCodes,
   setPopulationList,
-  addClass = "",
+  addClass = '',
+  mode,
 }: PrefListProps) {
   const [existingColorList, setExistingColorList] = useState<string[]>([]);
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
-  addClass = addClass !== "" ? " " + addClass : "";
+  addClass = addClass !== '' ? ' ' + addClass : '';
 
   useEffect(() => {
     // 都道府県リストの取得
@@ -22,7 +23,7 @@ export default function PrefList({
         const data = await fetchPrefectures();
         setPrefectures(data);
       } catch (error: any) {
-        console.error("fetchエラー", error.message);
+        console.error('fetchエラー', error.message);
         setPrefectures(mockPrefectures);
       }
     };
@@ -33,7 +34,7 @@ export default function PrefList({
   const handleChange = async (
     prefCode: number,
     prefName: string,
-    checked: boolean
+    checked: boolean,
   ) => {
     if (checked) {
       // チェックした場合の処理
@@ -41,7 +42,7 @@ export default function PrefList({
 
       // 人口データを取得してステートに格納
       try {
-        const popData = await fetchPopulation(prefCode);
+        const popData = await fetchPopulation(prefCode, mode);
         const color = setRandomColor();
         setExistingColorList((prevColor) => [...prevColor, color]);
         setPopulationList((prev: PopulationData[]) => [
@@ -54,15 +55,15 @@ export default function PrefList({
           },
         ]);
       } catch (err) {
-        console.error("人口データ取得に失敗しました", err);
+        console.error('人口データ取得に失敗しました', err);
       }
     } else {
       // チェックが OFF になった
       setSelectedPrefCodes((prev: number[]) =>
-        prev.filter((code) => code !== prefCode)
+        prev.filter((code) => code !== prefCode),
       );
       setPopulationList((prev: PopulationData[]) =>
-        prev.filter((p) => p.prefCode !== prefCode)
+        prev.filter((p) => p.prefCode !== prefCode),
       );
     }
   };
