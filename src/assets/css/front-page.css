@@ -339,6 +339,7 @@ html {
      -moz-appearance: none;
           appearance: none;
 }
+
 .c-label {
   font-size: 1.4rem;
   font-weight: 700;
@@ -484,6 +485,7 @@ html {
 .l-prefList.--homePage {
   padding-left: 10px;
 }
+
 .l-chart {
   position: relative;
 }
@@ -512,6 +514,7 @@ html {
   margin-bottom: 12px;
   margin-left: 12px;
 }
+
 @media screen and (width <= 1024px) {
   .l-main {
     padding: 40px 40px 100px;
