@@ -6,7 +6,7 @@
   display: block;
   position: relative;
   padding: 0 0 0 10px;
-  color: $title;
+  color: $primary-color;
   font-size: 2.6rem;
   font-weight: 700;
   line-height: 1.2;
@@ -19,7 +19,7 @@
     width: 4px;
     height: 100%;
     margin-right: 10px;
-    background-color: $corp;
+    background-color: $main-bg;
 
     // タイトルの左側のスタイル
     content: '';
@@ -27,7 +27,7 @@
 }
 
 .c-mdTtl {
-  color: $title;
+  color: $primary-color;
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.2;
@@ -81,9 +81,6 @@
   font-weight: 700;
   line-height: 2.8rem;
   appearance: none;
-
-  .c-select__option {
-  }
 }
 
 .c-label {

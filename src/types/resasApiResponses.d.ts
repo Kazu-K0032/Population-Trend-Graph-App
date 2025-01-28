@@ -23,7 +23,8 @@ type PrefListProps = {
   setPopulationList: Dispatch<SetStateAction<PopulationData[]>>;
   addClass?: string;
   mode: Mode;
+  loading?: boolean;
 };
 
 // モードの型
-type Mode = "総人口" | "年少人口" | "生産年齢人口" | "老年人口";
+type Mode = '総人口' | '年少人口' | '生産年齢人口' | '老年人口';

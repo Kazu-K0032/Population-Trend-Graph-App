@@ -32,11 +32,12 @@ export default function ChartPopulation() {
   const [populationList, setPopulationList] = useState<PopulationData[]>([]);
   // グラフモードの管理
   const [mode, setMode] = useState<Mode>('総人口');
+  // ロード中かどうかを管理
+  const [loading, setLoading] = useState<boolean>(false);
 
   // モードハンドリング
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as Mode;
-    // console.log("graphMode", value);
     setMode(value);
   };
 
@@ -44,6 +45,9 @@ export default function ChartPopulation() {
     if (selectedPrefCodes.length === 0) return;
 
     const updatePopulationByMode = async () => {
+      // true - ユーザーに処理が完了するまで別の操作をさせない
+      setLoading(true);
+      console.log('true');
       try {
         // 既存都道府県は維持しつつ、fetchで取得されるデータのみ更新する
         const updateList = await Promise.all(
@@ -58,6 +62,8 @@ export default function ChartPopulation() {
         setPopulationList(updateList);
       } catch (err) {
         console.error('モードを切り替えた時の再取得に失敗しました。', err);
+      } finally {
+        setLoading(false);
       }
     };
     updatePopulationByMode();
@@ -73,6 +79,7 @@ export default function ChartPopulation() {
           setPopulationList={setPopulationList}
           addClass="--homePage"
           mode={mode}
+          loading={loading}
         />
       </section>
 
@@ -92,8 +99,13 @@ export default function ChartPopulation() {
             getOptionValue={(option) => option.value}
             wrapperClassName="l-selector"
             className="l-selector__select"
+            disabled={loading}
           />
-          <ModeChart populationList={populationList} mode={mode} />
+          <ModeChart
+            populationList={populationList}
+            mode={mode}
+            loading={loading}
+          />
         </section>
       ) : (
         <section className="l-section">
@@ -111,6 +123,7 @@ export default function ChartPopulation() {
             getOptionValue={(option) => option.value}
             wrapperClassName="l-selector"
             className="l-selector__select"
+            disabled={loading}
           />
         </section>
       )}

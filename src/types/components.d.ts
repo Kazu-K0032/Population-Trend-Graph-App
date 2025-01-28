@@ -12,6 +12,7 @@ type CheckItemProps = {
   isChecked: boolean; // チェックされたかどうか. trueならチェック済み
   addClass?: string; // input, labelタグを囲うdivタグに追加するクラス名
   onChange: (checked: boolean) => void; // チェックをトリガーとする関数
+  disabled?: boolean; // ユーザーの追加操作を制御する(true - ユーザーは他の操作ができないようにする)
 };
 
 // セレクト タグの型

@@ -6,16 +6,18 @@ interface SelectorProps<T> {
   changeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void; // onChangeハンドラ
   getOptionLabel: (option: T) => string; // オプションのラベル (option要素の表示文字列) を返す関数
   getOptionValue: (option: T) => string | number; // オプションの value (option要素のvalue属性) を返す関数
+  disabled?: boolean; // ユーザーの追加操作を制御する(true - ユーザーは他の操作ができないようにする
 }
 
 export default function Selector<T>({
   value,
-  addClass = "",
+  addClass = '',
   id,
   options,
   changeHandler,
   getOptionLabel,
   getOptionValue,
+  disabled = false,
 }: SelectorProps<T>) {
   return (
     <select
@@ -23,6 +25,7 @@ export default function Selector<T>({
       value={value}
       onChange={changeHandler}
       className={`c-select ${addClass}`}
+      disabled={disabled}
     >
       {options.map((option, index) => {
         const optionValue = getOptionValue(option);

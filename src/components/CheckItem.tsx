@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function CheckItem({
   id,
   name,
   isChecked: initialChecked,
-  addClass = "",
+  addClass = '',
   onChange,
+  disabled = false,
 }: CheckItemProps) {
   const [isChecked, setIsChecked] = useState(initialChecked);
 
@@ -19,10 +20,10 @@ export default function CheckItem({
     onChange(newChecked);
   };
 
-  addClass = addClass !== "" ? addClass + " " : ""
+  addClass = addClass !== '' ? addClass + ' ' : '';
 
   return (
-    <div className={`${addClass}c-check${isChecked ? " --checked" : ""}`}>
+    <div className={`${addClass}c-check${isChecked ? ' --checked' : ''}`}>
       <input
         type="checkbox"
         id={id}
@@ -30,11 +31,9 @@ export default function CheckItem({
         checked={isChecked}
         onChange={handleCheckboxChange}
         className="c-check__box"
+        disabled={disabled}
       />
-      <label
-        htmlFor={id}
-        className='c-check__label'
-      >
+      <label htmlFor={id} className="c-check__label">
         {name}
       </label>
     </div>
