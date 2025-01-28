@@ -22,7 +22,7 @@ export const chartOptions: ChartOptions<"line"> = {
       // y軸の設定
       title: {
         display: true,
-        text: "人口数",
+        text: "人口数（人）",
         color: "#000",
         font: {
           // タイトル
@@ -46,7 +46,7 @@ export const chartOptions: ChartOptions<"line"> = {
       position: "bottom",
       title: {
         display: true,
-        text: "年度",
+        text: "年度（年）",
         color: "#000",
         font: {
           size: 18,
