@@ -1,7 +1,7 @@
 ## RESAS APIのサービス終了に関して
 RESAS APIの新規作成は**2024年10月31日**までになります。
 
-2025年3月24日をもって、RESAS APIのすべてのサービスの提供が終了します
+**2025年3月24日**をもって、RESAS APIのすべてのサービスの提供が終了します
 
 参考：[RESAS APIの提供終了・新規利用申し込み停止について](https://opendata.resas-portal.go.jp/docs/api/v1/index.html)
 
