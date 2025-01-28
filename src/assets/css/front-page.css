@@ -529,7 +529,7 @@ html {
     grid-template-columns: repeat(4, 1fr);
   }
   .l-chart .l-chart__graph {
-    min-height: 300px;
+    min-height: 500px;
   }
   .l-chart .l-chart__loadingTxt {
     transform: translate(-35%, -75%);
