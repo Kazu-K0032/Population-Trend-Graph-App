@@ -7,7 +7,6 @@ export async function fetchPopulation(prefCode: number, mode: string) {
   const useMockData = import.meta.env.VITE_APP_USE_MOCK_DATA === 'true';
 
   if (useMockData) {
-    console.log('モックデータモードが有効です。実際のデータを使用します。');
     return generateMockPopulationData(prefCode, mode);
   }
 
