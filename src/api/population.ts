@@ -31,13 +31,16 @@ export async function fetchPopulation(prefCode: number, mode: string) {
     throw new Error(`未対応のモードです: ${mode}`);
   }
 
-  // e-Stat APIのエンドポイント
+  // 環境変数でAPI URLを制御（開発環境ではプロキシ、本番環境では直接アクセス）
+  const apiUrl =
+    import.meta.env.VITE_APP_API_URL ||
+    'https://api.e-stat.go.jp/rest/2.0/app/json';
   const path = `/getStatsData?appId=${appId}&statsDataId=${statsDataId}&cdArea=${prefCode
     .toString()
     .padStart(2, '0')}`;
 
   try {
-    const response = await fetch(`/api/estat${path}`, {
+    const response = await fetch(`${apiUrl}${path}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

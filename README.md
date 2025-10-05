@@ -46,6 +46,9 @@ VITE_APP_ESTAT_APP_ID=あなたのe-StatアプリケーションID
 
 # APIサービス終了時のフォールバック（オプション）
 VITE_APP_USE_MOCK_DATA=false
+
+# API URL（開発環境ではプロキシ、本番環境では直接アクセス）
+VITE_APP_API_URL=/api/estat
 ```
 
 **e-Stat API のアプリケーション ID 取得方法:**
