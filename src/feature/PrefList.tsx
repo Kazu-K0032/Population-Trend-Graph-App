@@ -23,8 +23,11 @@ export default function PrefList({
       try {
         const data = await fetchPrefectures();
         setPrefectures(data);
-      } catch (error: any) {
-        console.error('fetchエラー', error.message);
+      } catch (error: unknown) {
+        console.error(
+          'fetchエラー',
+          error instanceof Error ? error.message : 'Unknown error'
+        );
         setPrefectures(mockPrefectures);
       }
     };
@@ -35,7 +38,7 @@ export default function PrefList({
   const handleChange = async (
     prefCode: number,
     prefName: string,
-    checked: boolean,
+    checked: boolean
   ) => {
     if (checked) {
       // チェックした場合の処理
@@ -61,10 +64,10 @@ export default function PrefList({
     } else {
       // チェックが OFF になった
       setSelectedPrefCodes((prev: number[]) =>
-        prev.filter((code) => code !== prefCode),
+        prev.filter((code) => code !== prefCode)
       );
       setPopulationList((prev: PopulationData[]) =>
-        prev.filter((p) => p.prefCode !== prefCode),
+        prev.filter((p) => p.prefCode !== prefCode)
       );
     }
   };

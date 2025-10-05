@@ -1,4 +1,4 @@
-import { createRequest } from "../utils/fetcher";
+import { createRequest } from '../utils/fetcher';
 
 /**
  * 都道府県コードから、総人口データを取得する関数
@@ -9,13 +9,15 @@ export async function fetchPopulation(prefCode: number, mode: string) {
   const path = `/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode}`;
   const response = await fetch(
     createRequest(path, {
-      method: "GET",
+      method: 'GET',
     })
   );
   if (!response.ok) {
-    throw new Error("人口データの取得に失敗しました");
+    throw new Error('人口データの取得に失敗しました');
   }
   const json = await response.json();
-  const populationData = json.result.data.find((d: any) => d.label === mode);
+  const populationData = json.result.data.find(
+    (d: { label: string }) => d.label === mode
+  );
   return populationData?.data ?? [];
 }
