@@ -34,9 +34,14 @@ export const chartOptions: ChartOptions<'line'> = {
       ticks: {
         // y軸の各値の設定
         callback: (value) => {
-          // ミリオン(m)にする
           const numValue = Number(value);
-          return numValue / 1_000_000 + 'm';
+          if (numValue >= 1_000_000) {
+            return (numValue / 1_000_000).toFixed(1) + 'M';
+          } else if (numValue >= 1_000) {
+            return (numValue / 1_000).toFixed(0) + 'K';
+          } else {
+            return numValue.toLocaleString();
+          }
         },
         color: '#000',
       },

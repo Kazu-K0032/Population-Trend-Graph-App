@@ -1,11 +1,7 @@
-const BASE_URL = import.meta.env.VITE_APP_API_URL ?? "";
+const BASE_URL = 'https://api.e-stat.go.jp/rest/2.0/app/json';
 
-if (!BASE_URL) {
-  throw new Error("VITE_APP_API_URL がセットされていません");
-}
-
-if (!import.meta.env.VITE_APP_API_KEY) {
-  throw new Error("VITE_APP_API_KEY がセットされていません");
+if (!import.meta.env.VITE_APP_ESTAT_APP_ID) {
+  throw new Error('VITE_APP_ESTAT_APP_ID がセットされていません');
 }
 
 export const createRequest = (
@@ -21,12 +17,7 @@ export const createRequest = (
   const headers = new Headers(
     init.headers instanceof Headers ? [...init.headers] : init.headers
   );
-  headers.append("content-type", "application/json");
-
-  if (!import.meta.env.VITE_APP_API_KEY) {
-    throw new Error("VITE_APP_API_KEY がセットされていません。");
-  }
-  headers.append("X-API-KEY", import.meta.env.VITE_APP_API_KEY);
+  headers.append('content-type', 'application/json');
 
   // リクエストの作成
   const request = new Request(input, { ...init, headers });

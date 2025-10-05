@@ -22,7 +22,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 export default function ChartPopulation() {
@@ -47,7 +47,6 @@ export default function ChartPopulation() {
     const updatePopulationByMode = async () => {
       // true - ユーザーに処理が完了するまで別の操作をさせない
       setLoading(true);
-      console.log('true');
       try {
         // 既存都道府県は維持しつつ、fetchで取得されるデータのみ更新する
         const updateList = await Promise.all(
@@ -57,7 +56,7 @@ export default function ChartPopulation() {
               ...item,
               data: data,
             };
-          }),
+          })
         );
         setPopulationList(updateList);
       } catch (err) {
@@ -67,6 +66,7 @@ export default function ChartPopulation() {
       }
     };
     updatePopulationByMode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   return (
