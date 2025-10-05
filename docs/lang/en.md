@@ -43,6 +43,9 @@ Create a `.env.local` file.
 ```bash
 # .env.local
 VITE_APP_ESTAT_APP_ID=Your e-Stat application ID
+
+# Fallback for API service termination (optional)
+VITE_APP_USE_MOCK_DATA=false
 ```
 
 **How to obtain an e-Stat API Application ID:**

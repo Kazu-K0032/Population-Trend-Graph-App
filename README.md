@@ -43,6 +43,9 @@ npm install
 ```bash
 # .env.local
 VITE_APP_ESTAT_APP_ID=あなたのe-StatアプリケーションID
+
+# APIサービス終了時のフォールバック（オプション）
+VITE_APP_USE_MOCK_DATA=false
 ```
 
 **e-Stat API のアプリケーション ID 取得方法:**
