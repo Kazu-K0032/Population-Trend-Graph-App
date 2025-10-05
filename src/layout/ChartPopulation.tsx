@@ -66,7 +66,6 @@ export default function ChartPopulation() {
       }
     };
     updatePopulationByMode();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   return (
