@@ -3,14 +3,29 @@
  * @returns 人口データ
  */
 export async function fetchPopulation(prefCode: number, mode: string) {
+  // デバッグ情報を追加
+  console.log('Environment variables:', {
+    VITE_APP_ESTAT_APP_ID: import.meta.env.VITE_APP_ESTAT_APP_ID,
+    VITE_APP_USE_MOCK_DATA: import.meta.env.VITE_APP_USE_MOCK_DATA,
+    NODE_ENV: import.meta.env.MODE,
+  });
+
   // モックデータモードの確認（APIサービス終了時のフォールバック）
   const useMockData = import.meta.env.VITE_APP_USE_MOCK_DATA === 'true';
 
   if (useMockData) {
+    console.log('Using mock data mode');
     return generateMockPopulationData(prefCode, mode);
   }
 
   const appId = import.meta.env.VITE_APP_ESTAT_APP_ID;
+
+  if (!appId) {
+    console.warn(
+      'VITE_APP_ESTAT_APP_ID is not set. Using mock data as fallback.'
+    );
+    return generateMockPopulationData(prefCode, mode);
+  }
 
   // 各モードに対応する統計表ID
   const statsDataIds = {
